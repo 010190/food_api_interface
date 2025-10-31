@@ -1,0 +1,67 @@
+{% extends "index.html" %}
+{% from 'bootstrap4/form.html' import render_form %}
+
+{% block styling %}
+body {
+                background-image: url('static/recipe.jpg');
+                background-repeat:no-repeat;
+                background-size: cover;
+                color:white;
+              }
+.border-solid { border-style:  solid ;
+                border-color: black;
+                border-width: 2px;
+
+}
+.equal {
+            width: 240px;
+             width:200px;
+                word-wrap: break-word;}
+ {% endblock %}
+{% block content %}
+    {% if results == 0 %}
+    <div class="container" style="text-align:center">
+    <div class="row  ">
+        <h2 class="green_outline" >Discover new recipes!</h2>
+
+
+    </div>
+    <div class="row ">
+        <p class="green_outline" >Use our site to discover recipes! <br>
+    With just few clicks, receive your new recipes and forget about boredom<br>
+    Enjoy dishes of cuisines of all around the world, the way you like it!</p>
+    </div>
+    <div class="row">
+            {{ render_form(form, novalidate=True) }}
+    </div>
+</div>
+    {% else %}
+<div class="container"> <h1 class="green_outline" style="text-align:center"> Your recipes</h1> </div>
+<div class="row" style="color:white; text-align:center; ">
+        <h3 class="green_outline" style="font-size:px20">Look at our propositions for your new meals!</h3>
+            </div>
+<div class="container " style="color:black; background-color:white;">
+
+<div class="row border-solid">
+
+                      <div class="col equal border-solid">id</div>
+                      <div class="col equal border-solid"> title:</div>
+                      <div class="col equal border-solid"> image:</div>
+                      <div class="col equal border-solid"> recipe:</div>
+
+
+</div>
+
+{% for task in results %}
+<div class="row border-solid">
+    <div class="col equal border-solid" >{{task.id}}</div>
+    <div class="col equal border-solid">{{task.title}}</div>
+    <div class="col equal border-solid">
+        <img src="{{task.image}}"> </div>
+    <div class="col equal border-solid"><a href="{{task.sourceUrl}}">{{task.sourceUrl}}</a></div>
+    </div>
+    {% endfor %}
+        </div>
+    </div>
+{% endif %}
+{%endblock%}

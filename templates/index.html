@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link href="static/css/bootstrap.css" rel="stylesheet">
+    <style>
+        {%block styling %}
+
+               body {
+
+                       resize: both;
+                       overflow: auto;
+                       background-image: url('static/background.jpg');
+                       background-repeat:no-repeat;
+                       background-size: cover
+
+                     }
+                    {% endblock %}
+               .green_outline {
+                       color: white;
+                       text-shadow: 0.0px 10.0px 0.02px #248855 ,
+                       9.8px 2.1px 0.02px #248855,
+                       4.2px -9.1px 0.02px #248855,
+                       -8.0px -6.0px 0.02px #248855,
+                       -7.6px 6.5px 0.02px #248855,
+                       4.8px 8.8px 0.02px #248855,
+                       9.6px -2.8px 0.02px #248855,
+                       -0.7px -10.0px 0.02px #248855,
+                       -9.9px -1.5px 0.02px #248855,
+                       -3.5px 9.4px 0.02px #248855,
+                       8.4px 5.4px 0.02px #248855,
+                       7.1px -7.0px 0.02px #248855,
+                       -5.4px -8.4px 0.02px #248855,
+                       -9.4px 3.5px 0.02px #248855,
+                       1.4px 9.9px 0.02px #248855,
+                       10.0px 0.8px 0.02px #248855,
+                       2.9px -9.6px 0.02px #248855,
+                       -8.7px -4.8px 0.02px #248855,
+                       -6.6px 7.5px 0.02px #248855,
+                       5.9px 8.0px 0.02px #248855,
+                       9.1px -4.1px 0.02px #248855,
+                       -2.1px -9.8px 0.02px #248855,
+                       -10.0px -0.1px 0.02px #248855,
+                       -2.2px 9.8px 0.02px #248855,
+                       9.1px 4.2px 0.02px #248855,
+                       6.1px -8.0px 0.02px #248855,
+                       -6.5px -7.6px 0.02px #248855,
+                       -8.8px 4.7px 0.02px #248855,
+                       2.7px 9.6px 0.02px #248855,
+                       10.0px -0.6px 0.02px #248855,
+                       1.5px -9.9px 0.02px #248855,
+                       -9.3px -3.6px 0.02px #248855,
+                       -5.5px 8.4px 0.02px #248855,
+                       7.0px 7.2px 0.02px #248855,
+                       8.5px -5.3px 0.02px #248855,
+                       -3.4px -9.4px 0.02px #248855,
+                       -9.9px 1.3px 0.02px #248855,
+                       -0.8px 10.0px 0.02px #248855,
+                       9.6px 2.9px 0.02px #248855,
+                       4.9px -8.7px 0.02px #248855,
+                       -7.5px -6.7px 0.02px #248855,
+                       -8.1px 5.9px 0.02px #248855,
+                       4.0px 9.2px 0.02px #248855,
+                       9.8px -2.0px 0.02px #248855,
+                       0.2px -10.0px 0.02px #248855,
+                       -9.7px -2.3px 0.02px #248855,
+                       -4.3px 9.0px 0.02px #248855,
+                       7.9px 6.1px 0.02px #248855
+                   }
+    </style>
+
+</head>
+<body>
+<nav class="navbar navbar-light bg-light" aria-label="First navbar example">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{{url_for('index')}}">FOOD4U</a>
+        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse" id="navbarsExample01" style="">
+            <ul class="navbar-nav me-auto mb-2">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{url_for('index')}}">Home</a>
+                </li>
+                <li class="nav-item"><a class="nav-link active" href="{{url_for('recipes')}}">Find recipes</a></li>
+                <li class="nav-item"><a class="nav-link active" href="{{url_for('meal_plan')}}">Create meal plan</a>
+                </li>
+                <li class="nav-item"><a class="nav-link active" href="{{url_for('nutrition')}}">Get nutriscore</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+{% block content%}
+<div class="container" style="padding:50px">
+
+    <div class="row" style="color:white; text-align:center;">
+
+        <p class="green_outline" style="font-size:50px;">FOOD4U</p>
+    </div>
+    <div class="row" style="color:white; text-align:center; ">
+        <h3 class="green_outline" style="font-size:px20">Welcome to FOOD4U - website for cooking curious!<br>
+            Find new recipes, create meal plans or check nutrition's score of products<br>
+            All at one place!</h3>
+    </div>
+    <div class="row" style="padding:50px">
+
+        <a class="btn btn-success btn-xl" href="{{url_for('recipes')}}"> Find recipes</a>
+
+
+        <a class="btn btn-success btn-xl" href="{{url_for('meal_plan')}}"> Create meal plan</a>
+
+
+        <a class="btn btn-success btn-xl" href="{{url_for('nutrition')}}"> Find nutrition score of ingredient</a>
+
+        <div>
+        </div>
+        {% endblock %}
+    </div>
+</div>
+        <div id="footer"  class="container-fluid" style="color:white;  position:fixed; bottom:0; width:100%; background-color:white">
+                <footer class="footer-dark d-flex flex-wrap justify-content-between align-items-center py-3  border-top ">
+                <div class="col-md-4 d-flex align-items-center">
+                    <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1" aria-label="Bootstrap">
+                        <svg class="bi" width="30" height="24" aria-hidden="false"><use xlink:href="#bootstrap"></use></svg>
+                    </a> <span class="mb-3 mb-md-0 text-body-secondary">© 2025 Company, Inc</span>
+                </div> <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+                <li class="ms-3">
+                    <a class="text-body-secondary" href="#" aria-label="Instagram">
+                        <svg class="bi" width="24" height="24" aria-hidden="false"><use xlink:href="#instagram"></use></svg></a>
+                </li> <li class="ms-3"><a class="text-body-secondary" href="#" aria-label="Facebook">
+                <svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use>
+                </svg>
+                </a>
+            </li>
+            </ul> </footer> </div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+</html>

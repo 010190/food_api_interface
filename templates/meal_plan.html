@@ -1,0 +1,90 @@
+{% extends "index.html" %}
+{% from 'bootstrap4/form.html' import render_form %}
+{% block styling %}
+body {
+                background-image: url('static/meal_plan1.png');
+                background-repeat:no-repeat;
+                background-size: cover;
+                color:white;
+              }
+
+.border-solid { border-style:  solid ;
+                border-color: black;
+                border-width: 2px;
+              }
+
+.equal {
+    width:200px;
+    word-wrap: break-word;}
+{% endblock %}
+
+
+{% block content %}
+{% if results == 0 %}
+<div class="container" style="text-align:center">
+    <div class="row">
+        <h2 class="green_outline" >Create meal plan</h2>
+
+
+    </div>
+    <div class="row">
+        <p class="green_outline" >Use our site to create your own meal plan! <br>
+    With just few clicks, receive your own unique meal plan<br>
+    Enjoy our meal plans and eat healthy!</p>
+    </div>
+    <div class="row">
+            {{ render_form(meal_form, novalidate=True) }}
+    </div>
+</div>
+    {% else %}
+<div class="container "> <h1 class="green_outline" style="text-align:center"> Your meal plan</h1> </div>
+<div class="row" style="color:white; text-align:center; ">
+        <h3 class="green_outline" style="font-size:px20">Check out your new meal plan created with FOOD4U!</h3>
+            </div>
+<div class="container border-solid" style="color:black; background-color:white;">
+
+<div class="row border-solid">
+
+                      <div class="col equal border-solid">day</div>
+                      <div class="col equal border-solid"> title:</div>
+                      <div class="col equal border-solid"> recipe:</div>
+    <div class="col equal border-solid">nutrition's</div>
+
+
+</div>
+{% if day == "week" %}
+{% for day in days%}
+{% for task in results['week'][day]["meals"] %}
+<div class="row border-solid">
+    <div class="col equal border-solid" >{{day}}</div>
+    <div class="col equal border-solid"><b>{{task.title}}</b></div>
+
+    <div class="col equal border-solid"><a href="{{task.sourceUrl}}">{{task.sourceUrl}}</a></div>
+    <div class="col equal border-solid"> calories:<b>{{results[day]['nutrients']['calories']}}kcal</b> <br>
+        protein:<b>{{results[day]['nutrients']['protein']}}g</b> <br>
+        carbohydrates:<b>{{results[day]['nutrients']['carbohydrates']}}g </b><br>
+        fat:<b> {{results[day]['nutrients']['fat']}}g</b>
+    </div>
+    </div>
+    {% endfor %}
+    {% endfor %}
+    {% elif day == "day" %}
+    {% for task in results["meals"] %}
+
+    <div class="row border-solid">
+    <div class="col equal border-solid" >-</div>
+    <div class="col equal border-solid"><b>{{task.title}}</b></div>
+
+    <div class="col equal border-solid"><a href="{{task.sourceUrl}}">{{task.sourceUrl}}</a></div>
+    <div class="col equal border-solid"> calories:<b>{{results['nutrients']['calories']}}kcal</b> <br>
+        protein:<b>{{results['nutrients']['protein']}}g</b> <br>
+        carbohydrates:<b>{{results['nutrients']['carbohydrates']}}g </b><br>
+        fat:<b> {{results['nutrients']['fat']}}g</b>
+    </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+        </div>
+    </div>
+{% endif %}
+{% endblock %}
