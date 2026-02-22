@@ -1,23 +1,162 @@
 {% extends "index.html" %}
 {% from 'bootstrap4/form.html' import render_form %}
+{% block styling  %}
 
-{% block styling %}
-body {
-                background-image: url('static/recipe.jpg');
-                background-repeat:no-repeat;
-                background-size: cover;
-                color:white;
-              }
-.border-solid { border-style:  solid ;
-                border-color: black;
-                border-width: 2px;
-
+.recipe-table-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: transparent !important;
 }
-.equal {
-            width: 240px;
-             width:200px;
-                word-wrap: break-word;}
- {% endblock %}
+
+.recipe-table-header {
+    display: flex;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    margin-bottom: 0;
+}
+
+.recipe-table-header .recipe-col {
+    color: #f8fafc;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.875rem;
+    padding: 1.25rem 1.5rem;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    flex-shrink: 0;
+}
+
+.recipe-table-header .recipe-col:last-child {
+    border-right: none;
+}
+
+.recipe-table-row {
+    display: flex;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-bottom: 0;
+}
+
+.recipe-table-row:last-child {
+    border-radius: 0 0 16px 16px;
+    border-bottom: none;
+}
+
+.recipe-table-row:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: translateX(4px);
+    box-shadow: -4px 0 0 #10b981, 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.recipe-col {
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    border-right: 1px solid rgba(226, 232, 240, 0.6);
+    font-size: 0.95rem;
+    color: #334155;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+.recipe-col:last-child {
+    border-right: none;
+}
+
+.recipe-col-id {
+    width: 80px;
+    font-weight: 700;
+    color: #059669;
+    font-size: 0.9rem;
+    justify-content: center;
+}
+
+.recipe-col-title {
+    width: 300px;
+    font-weight: 500;
+    color: #1e293b;
+}
+
+.recipe-col-image {
+    width: 140px;
+    justify-content: center;
+}
+
+.recipe-col-link {
+    width: 380px;
+}
+
+.recipe-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.recipe-img:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.recipe-link {
+    color: #059669;
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    transition: color 0.2s ease;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+    display: block;
+}
+
+.recipe-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #10b981, #34d399);
+    transition: width 0.3s ease;
+}
+
+.recipe-link:hover {
+    color: #047857;
+}
+
+.recipe-link:hover::after {
+    width: 100%;
+}
+
+@media (max-width: 900px) {
+    .recipe-table-container {
+        overflow-x: auto;
+        padding: 1rem;
+    }
+
+    .recipe-table-header,
+    .recipe-table-row {
+        min-width: 900px;
+    }
+
+    .recipe-col {
+        padding: 0.75rem;
+    }
+}
+
+{% endblock %}
+
 {% block content %}
     {% if results == 0 %}
     <div class="container" style="text-align:center">
@@ -40,25 +179,25 @@ body {
 <div class="row" style="color:white; text-align:center; ">
         <h3 class="green_outline" style="font-size:px20">Look at our propositions for your new meals!</h3>
             </div>
-<div class="container " style="color:black; background-color:white;">
+<div class="container recipe-table-container" style="color:black; background-color:white;">
 
-<div class="row border-solid">
+<div class="row recipe-table-header">
 
-                      <div class="col equal border-solid">id</div>
-                      <div class="col equal border-solid"> title:</div>
-                      <div class="col equal border-solid"> image:</div>
-                      <div class="col equal border-solid"> recipe:</div>
+                      <div class="col recipe-col recipe-col-id">id</div>
+                      <div class="col recipe-col recipe-col-title"> title:</div>
+                      <div class="col recipe-col recipe-col-image"> image:</div>
+                      <div class="col recipe-col recipe-col-link"> recipe:</div>
 
 
 </div>
 
 {% for task in results %}
-<div class="row border-solid">
-    <div class="col equal border-solid" >{{task.id}}</div>
-    <div class="col equal border-solid">{{task.title}}</div>
-    <div class="col equal border-solid">
-        <img src="{{task.image}}"> </div>
-    <div class="col equal border-solid"><a href="{{task.sourceUrl}}">{{task.sourceUrl}}</a></div>
+<div class="row recipe-table-row">
+    <div class="col recipe-col recipe-col-id" >{{task.id}}</div>
+    <div class="col recipe-col recipe-col-title">{{task.title}}</div>
+    <div class="col recipe-col recipe-col-image">
+        <img src="{{task.image}}" class="recipe-img"> </div>
+    <div class="col recipe-col recipe-col-link"><a href="{{task.sourceUrl}}" class="recipe-link">{{task.sourceUrl}}</a></div>
     </div>
     {% endfor %}
         </div>
